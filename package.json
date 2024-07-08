@@ -1,0 +1,29 @@
+{
+  "name": "todo-server",
+  "version": "1.0.0",
+  "description": "Backend API for the Todo App.",
+  "main": "server.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lindo-pineapple/Todo-Server.git"
+  },
+  "keywords": [
+    "CRUD",
+    "Nodejs",
+    "API",
+    "Backend",
+    "Express",
+    "MongoDB",
+    "Mongoose",
+    "Todo"
+  ],
+  "author": "Lindokuhle Percieval Dlomo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Lindo-pineapple/Todo-Server/issues"
+  },
+  "homepage": "https://github.com/Lindo-pineapple/Todo-Server#readme"
+}
