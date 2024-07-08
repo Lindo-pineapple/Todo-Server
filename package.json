@@ -4,26 +4,23 @@
   "description": "Backend API for the Todo App.",
   "main": "server.js",
   "scripts": {
+    "start": "nodemon server.js",
     "test": "npm test"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Lindo-pineapple/Todo-Server.git"
   },
-  "keywords": [
-    "CRUD",
-    "Nodejs",
-    "API",
-    "Backend",
-    "Express",
-    "MongoDB",
-    "Mongoose",
-    "Todo"
-  ],
   "author": "Lindokuhle Percieval Dlomo",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Lindo-pineapple/Todo-Server/issues"
   },
-  "homepage": "https://github.com/Lindo-pineapple/Todo-Server#readme"
+  "homepage": "https://github.com/Lindo-pineapple/Todo-Server#readme",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongoose": "^8.4.5",
+    "nodemon": "^3.1.4"
+  }
 }
