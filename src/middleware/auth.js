@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { API, HTTP_CODES } from "../globals";
+import { API, HTTP_CODES } from "../globals.js";
 
 const AuthSecret = API.AUTH_SECRET;
 

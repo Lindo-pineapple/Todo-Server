@@ -1,6 +1,6 @@
 import pkg from "jsonwebtoken";
 import { compareSync } from "bcrypt";
-import User from "../models/UserModel";
+import User from "../models/UserModel.js";
 
 const AuthSecret = process.env.AUTH_SECRET;
 

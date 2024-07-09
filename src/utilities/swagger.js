@@ -1,4 +1,5 @@
 import swaggerJSDoc from "swagger-jsdoc";
+import { API } from "../globals.js";
 
 const options = {
   definition: {
@@ -6,11 +7,11 @@ const options = {
     info: {
       title: "Todo-App API",
       version: "1.0.0",
-      description: "This is a simple CRUD API for an e-commerce platform",
+      description: "This is a simple CRUD (Create, Read, Update, Delete) API for Todo's in the Todo App."
     },
     servers: [
       {
-        url: `http://localhost:${process.env.PORT}`,
+        url: `http://localhost:${API.PORT}`,
         description: "Development server",
       },
     ],

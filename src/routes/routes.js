@@ -1,10 +1,11 @@
 import { Router } from "express";
-import userRoutes from "./userRoutes";
-import todoRoutes from "./todoRoutes";
+import UserRoutes from "./userRoutes.js";
+import TodoRoutes from "./todoRoutes.js";
+import auth from "../middleware/auth.js";
 
 const router = Router();
 
-router.use("/todos", auth, todoRoutes);
-router.use("/user", userRoutes);
+router.use("/todos", auth, TodoRoutes);
+router.use("/user", UserRoutes);
 
-module.exports = router;
+export default router;

@@ -23,12 +23,17 @@
   "homepage": "https://github.com/Lindo-pineapple/Todo-Server#readme",
   "dependencies": {
     "@babel/runtime": "^7.24.7",
+    "bcrypt": "^5.1.1",
     "dayjs": "^1.11.11",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.4.5",
     "morgan": "^1.10.0",
-    "node-fetch": "^3.3.2"
+    "node-fetch": "^3.3.2",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.24.7",

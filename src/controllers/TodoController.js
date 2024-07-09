@@ -1,11 +1,7 @@
-const TodoModel = require("../models/TodoModel");
-import GLOBALS from "../globals";
 import mongoose from "mongoose";
+import { HTTP_CODES, DEFAULT_ERROR_MESSAGE } from "../globals.js";
+import TodoModel from "../models/TodoModel.js";
 
-const {
-  HTTP_CODES,
-  DEFAULT_ERROR_MESSAGE,
-} = GLOBALS;
 
 export async function createTodo(req, res) {
   const todo = new TodoModel({

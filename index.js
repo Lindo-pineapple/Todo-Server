@@ -1,11 +1,12 @@
 import express, { json } from "express";
 import mongoose from "mongoose";
-import logger from "./src/utilities/logger";
-import swaggerUi from "swagger-ui-express"
-import swaggerSpec from "./config/swagger.js";
-import { API, HTTP_STATUS_CODES } from "./src/globals";
-
-const morgan = require("morgan");
+import swaggerUi from "swagger-ui-express";
+import session from "express-session";
+import morgan from "morgan";
+import logger from "./src/utilities/logger.js";
+import swaggerSpec from "./src/utilities/swagger.js";
+import { API, HTTP_CODES } from "./src/globals.js";
+import routes from "./src/routes/routes.js";
 
 const app = express();
 
@@ -29,15 +30,15 @@ mongoose.connect(API.DB_STRING).then(
         secret: API.AUTH_SECRET,
         resave: false,
         saveUninitialized: true,
-        cookie: { maxAge: 30 * 60 * 1000 } // 30 minutes
+        cookie: { maxAge: 30 * 60 * 1000 }, // 30 minutes
       })
     );
-  
+
     // Swagger Endpoint
     app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
     //Add the Routes
-    require("./src/routes")(app);
+    app.use(routes);
 
     // health check at root
     app.get("/", (req, res) => {
@@ -45,7 +46,7 @@ mongoose.connect(API.DB_STRING).then(
         return res.send(serviceName);
       }
 
-      res.status(HTTP_STATUS_CODES.SERVER_ERROR).send(serviceName);
+      res.status(HTTP_CODES.SERVER_ERROR).send(serviceName);
     });
 
     app.listen(port, () =>

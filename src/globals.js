@@ -1,4 +1,6 @@
-require('dotenv').config()
+import dotenv from 'dotenv'
+
+dotenv.config();
 
 const API = {
   PORT: process.env.PORT || 3005,
