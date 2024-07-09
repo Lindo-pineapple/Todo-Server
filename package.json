@@ -2,6 +2,7 @@
   "name": "todo-server",
   "version": "1.0.0",
   "description": "Backend API for the Todo App.",
+  "type": "module",
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
