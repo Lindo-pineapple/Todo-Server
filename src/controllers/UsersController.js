@@ -1,0 +1,52 @@
+import pkg from "jsonwebtoken";
+import { compareSync } from "bcrypt";
+import User from "../models/UserModel";
+
+const AuthSecret = process.env.AUTH_SECRET;
+
+export async function login(req, res) {
+  const { username, password } = req.body;
+  const user = await User.findOne({ username: username });
+  if (!user || !compareSync(password, user.password)) {
+    return res.status(401).send("Invalid username or password.");
+  }
+  const token = pkg.sign({ id: user._id }, AuthSecret, { expiresIn: "30m" });
+  res.status(HTTP_CODES.OK).send({ response: dataToSave, token: token });
+  req.session.token = token;
+}
+
+export async function register(req, res) {
+  const hashedPassword = hashSync(req.body.password, 10);
+  const user = new User({
+    _id: new mongoose.Types.ObjectId(),
+    username: req.body.username,
+    password: hashedPassword,
+    email: req.body.email,
+  });
+
+  try {
+    const dataToSave = await user.save();
+    const token = pkg.sign({ id: user._id }, AuthSecret, { expiresIn: "30m" });
+    res.status(HTTP_CODES.CREATED).send({ response: dataToSave, token: token });
+    req.session.token = token;
+  } catch (err) {
+    res
+      .status(HTTP_CODES.SERVER_ERROR)
+      .json({ message: DEFAULT_ERROR_MESSAGE });
+  }
+}
+
+export async function getCurrentUser(req, res) {
+  try {
+    const user = await User.findById(req.params.id);
+    if (user) {
+      res.status(HTTP_CODES.OK).json(user);
+    } else {
+      res.status(HTTP_CODES.NOT_FOUND).json({ message: "No User Logged In" });
+    }
+  } catch (err) {
+    res
+      .status(HTTP_CODES.SERVER_ERROR)
+      .json({ message: DEFAULT_ERROR_MESSAGE });
+  }
+}

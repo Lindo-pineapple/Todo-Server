@@ -1,6 +1,9 @@
-const mongoose = require('mongoose');
+import { Schema as _Schema, model } from 'mongoose';
 
-const dataSchema = new mongoose.Schema({
+const Schema = _Schema;
+const ObjectId = Schema.ObjectId;
+
+const Schema_Todo = new Schema({
     todo: {
         required: true,
         type: String
@@ -12,7 +15,11 @@ const dataSchema = new mongoose.Schema({
     isDone: {
         required: true,
         type: Boolean
+    },
+    userId: {
+        required: true,
+        type: ObjectId
     }
 })
 
-module.exports = mongoose.model('Data', dataSchema, 'todos')
+export default model('Data', Schema_Todo, 'todos')

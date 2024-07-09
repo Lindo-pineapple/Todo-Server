@@ -18,6 +18,16 @@ mongoose.connect(API.DB_STRING).then(
     app.use(express.json());
     app.use(morgan("dev"));
 
+    app.use(
+      session({
+        secret: API.AUTH_SECRET,
+        resave: false,
+        saveUninitialized: true,
+        cookie: { maxAge: 30 * 60 * 1000 } // 30 minutes
+      })
+    );
+  
+
     require("./src/routes")(app);
 
     // health check at root

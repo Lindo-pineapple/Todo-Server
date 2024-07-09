@@ -1,31 +1,58 @@
-# A Blank Node Project (with Mongoose) (LAST UPDATED JULY 2024)
-A blank project for Node to quickly get started with (using Mongoose).
+# Todo-App Backend API
 
-Primarily for APIs
+This is a simple CRUD (Create, Read, Update, Delete) API for Todo's in the Todo App. It's built with Node.js, Express, and MongoDb.
 
-Just clone to your PC and thereafter remove the `.git` folder by running `rm -rf .git` in your terminal in the project root folder.
-Then you can re-initialise with your own git by going `git init` or adding your remote via `git remote add origin [repo-link]`.
+## Getting Started
 
-Includes:
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-- pre-configured build scripts
-- pre-installed `dependencies`:
-  - `express`
-  - `dotenv`
-  - `@babel/runtime`
-  - `dayjs`
-  - `mongoose`
-- pre-installed `devDependencies`:
-  - `nodemon`
-  - `babel`
-  - `eslint`
-  - `mocha`
-  - `apidoc`
-  - `node-fetch`
-  - `morgan`
+### Prerequisites
 
-## Blank projects with pre-existing ORMs
+- Node.js
+- MongoDb
+- Postman or alternative to test API.
 
-There are other branches available to get you quickly setup depending on choice of ORM:
+### Installing
 
-- Mongoose: `git checkout mongoose`
+1. Clone the repository: `git clone https://github.com/Lindo-pineapple/Todo-Server Backend-API`
+2. Navigate to the project directory: `cd Backend-API`
+3. Install the dependencies: `npm install`
+
+### Configuration
+
+Create a `.env` file in the root directory of the project and add the following environment variables:
+
+```env
+PORT=3000
+MONGO_CONNECTION_STRING = your_mongoDb_database_connection_string
+AUTH_SECRET=your_app_auth_secret
+```
+
+### Running the Application
+1. Update the .env file with all your details, see `.env.sample`. simply rename the file to `.env` and replace the values with your values.
+2. Start the application: `npm start`.
+
+The application will be running at http://localhost:3000 unless a different port is specified.
+
+### Docker
+You can also run the application in a **Docker container**:
+
+* Build the Docker image: `docker build -t backend-api .`
+* Run the application in a Docker container: `docker run -p 3000:3000 -d backend-api`
+
+### Running the Tests
+Run the tests: `npm test`
+
+A `test-results.xml` file will be created with the test results.
+
+### API Documentation
+API documentation is available at http://localhost:3000/api-docs (when the application is running).
+
+### Built With
+* Node.js - JavaScript runtime
+* Express - Web application framework
+* MongoDb - Database
+* Docker - Containerization platform
+
+### License
+This project is licensed under the MIT License.

@@ -3,14 +3,8 @@ import GLOBALS from "../globals";
 import mongoose from "mongoose";
 
 const {
-  ACCESS_LEVELS,
   HTTP_CODES,
-  SUBCATEGORY_MAP,
-  PARENT_CATEGORY_MAP,
-  API,
-  USER_ID,
   DEFAULT_ERROR_MESSAGE,
-  ALL_RISK_EXCESS_CODES,
 } = GLOBALS;
 
 export async function createTodo(req, res) {
@@ -22,18 +16,18 @@ export async function createTodo(req, res) {
   });
   try {
     const dataToSave = await todo.save();
-    res.status(201).json(dataToSave);
+    res.status(HTTP_CODES.OK).json(dataToSave);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(HTTP_CODES.SERVER_ERROR).json({ message: DEFAULT_ERROR_MESSAGE });
   }
 }
 
 export async function getTodos(req, res) {
   try {
     const todos = await TodoModel.find();
-    res.status(200).json(todos);
+    res.status(HTTP_CODES.OK).json(todos);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(HTTP_CODES.SERVER_ERROR).json({ message: DEFAULT_ERROR_MESSAGE });
   }
 }
 
@@ -41,12 +35,12 @@ export async function getTodo(req, res) {
   try {
     const todo = await TodoModel.findById(req.params.id);
     if (todo) {
-      res.status(200).json(todo);
+      res.status(HTTP_CODES.OK).json(todo);
     } else {
-      res.status(404).json({ message: "Todo not found" });
+      res.status(HTTP_CODES.NOT_FOUND).json({ message: "Todo not found" });
     }
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(HTTP_CODES.SERVER_ERROR).json({ message: DEFAULT_ERROR_MESSAGE });
   }
 }
 
@@ -58,12 +52,12 @@ export async function updateTodo(req, res) {
 
     const result = await TodoModel.findByIdAndUpdate(id, updatedData, options);
     if (result) {
-      res.status(200).json(result);
+      res.status(HTTP_CODES.OK).json(result);
     } else {
-      res.status(404).json({ message: "Todo not found" });
+      res.status(HTTP_CODES.NOT_FOUND).json({ message: "Todo not found" });
     }
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(HTTP_CODES.SERVER_ERROR).json({ message: DEFAULT_ERROR_MESSAGE });
   }
 }
 
@@ -75,9 +69,9 @@ export async function deleteTodo(req, res) {
     if (data) {
       res.send(`Document with ${data.name} has been deleted..`);
     } else {
-      res.status(404).json({ message: "Todo not found" });
+      res.status(HTTP_CODES.NOT_FOUND).json({ message: "Todo not found" });
     }
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(HTTP_CODES.SERVER_ERROR).json({ message: DEFAULT_ERROR_MESSAGE });
   }
 }
