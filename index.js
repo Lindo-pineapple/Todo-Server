@@ -1,8 +1,12 @@
+import express, { json } from "express";
 import mongoose from "mongoose";
-import { API, HTTP_STATUS_CODES } from "./src/globals";
 import logger from "./src/utilities/logger";
+import swaggerUi from "swagger-ui-express"
+import swaggerSpec from "./config/swagger.js";
+import { API, HTTP_STATUS_CODES } from "./src/globals";
+
 const morgan = require("morgan");
-const express = require("express");
+
 const app = express();
 
 // The name of your app/service
@@ -11,13 +15,15 @@ const serviceName = "Todo-App/backend";
 // The port which it should listen on
 const port = API.PORT;
 
+//Connect to database
 mongoose.connect(API.DB_STRING).then(
   () => {
     logger.log("Successfully connected to DB");
 
-    app.use(express.json());
+    app.use(json());
     app.use(morgan("dev"));
 
+    //Create a session for User Auth
     app.use(
       session({
         secret: API.AUTH_SECRET,
@@ -27,7 +33,10 @@ mongoose.connect(API.DB_STRING).then(
       })
     );
   
+    // Swagger Endpoint
+    app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
+    //Add the Routes
     require("./src/routes")(app);
 
     // health check at root

@@ -5,6 +5,6 @@ import todoRoutes from "./todoRoutes";
 const router = Router();
 
 router.use("/todos", auth, todoRoutes);
-router.use("/users", userRoutes);
+router.use("/user", userRoutes);
 
 module.exports = router;
