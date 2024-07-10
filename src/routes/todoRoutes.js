@@ -5,7 +5,7 @@ import {
   updateTodo,
   deleteTodo,
   createTodo,
-} from "../Controllers/TodoController.js";
+} from "../controllers/TodoController.js";
 
 const router = Router();
 
