@@ -6,6 +6,6 @@ import auth from "../middleware/auth.js";
 const router = Router();
 
 router.use("/todos", auth, TodoRoutes);
-router.use("/user", UserRoutes);
+router.use("/users", UserRoutes);
 
 export default router;

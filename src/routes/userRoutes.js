@@ -70,6 +70,6 @@ router.post('/register', register);
  *             schema:
  *               $ref: '#/components/schemas/Users'
  */
-router.get('/me/:id', getCurrentUser);
+router.get('/me', getCurrentUser);
 
 export default router;

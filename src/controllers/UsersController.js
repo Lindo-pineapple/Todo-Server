@@ -1,5 +1,6 @@
 import pkg from "jsonwebtoken";
-import { compareSync } from "bcrypt";
+import { compareSync, hashSync } from "bcrypt";
+import { HTTP_CODES, DEFAULT_ERROR_MESSAGE } from "../globals.js";
 import User from "../models/UserModel.js";
 
 const AuthSecret = process.env.AUTH_SECRET;
@@ -11,14 +12,13 @@ export async function login(req, res) {
     return res.status(401).send("Invalid username or password.");
   }
   const token = pkg.sign({ id: user._id }, AuthSecret, { expiresIn: "30m" });
-  res.status(HTTP_CODES.OK).send({ response: dataToSave, token: token });
+  res.status(HTTP_CODES.OK).send({ response: user, token: token });
   req.session.token = token;
 }
 
 export async function register(req, res) {
   const hashedPassword = hashSync(req.body.password, 10);
   const user = new User({
-    _id: new mongoose.Types.ObjectId(),
     username: req.body.username,
     password: hashedPassword,
     email: req.body.email,
@@ -38,7 +38,7 @@ export async function register(req, res) {
 
 export async function getCurrentUser(req, res) {
   try {
-    const user = await User.findById(req.params.id);
+    const user = await User.findById(req.user.id);
     if (user) {
       res.status(HTTP_CODES.OK).json(user);
     } else {

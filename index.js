@@ -50,7 +50,7 @@ mongoose.connect(API.DB_STRING).then(
     });
 
     app.listen(port, () =>
-      logger.log(`${serviceName} listening on port ${port}!`)
+      logger.log(`${serviceName} listening on port ${port}`)
     );
   },
   (err) => logger.log("Error connecting to DB", err)
