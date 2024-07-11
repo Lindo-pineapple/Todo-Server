@@ -23,6 +23,11 @@ export async function register(req, res) {
     password: hashedPassword,
     email: req.body.email,
   });
+  const checkExists = await User.findOne({email: req.body.email});
+
+  if (checkExists) {
+    return res.send({data: 'User already Exists.'})
+  }
 
   try {
     const dataToSave = await user.save();
