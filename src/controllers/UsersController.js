@@ -31,7 +31,7 @@ export async function register(req, res) {
 
   try {
     const dataToSave = await user.save();
-    const token = pkg.sign({ id: user._id }, AuthSecret, { expiresIn: "30m" });
+    const token = pkg.sign({ id: user._id }, AuthSecret, { expiresIn: "60m" });
     res.status(HTTP_CODES.CREATED).send({ response: dataToSave, token: token });
     req.session.token = token;
   } catch (err) {
