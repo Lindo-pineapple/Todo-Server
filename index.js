@@ -43,7 +43,7 @@ mongoose.connect(API.DB_STRING).then(
     // health check at root
     app.get("/", (req, res) => {
       if (mongoose.connection.readyState === 1) {
-        return res.send(serviceName);
+        return res.status(200).send(serviceName);
       }
 
       res.status(HTTP_CODES.SERVER_ERROR).send(serviceName);
